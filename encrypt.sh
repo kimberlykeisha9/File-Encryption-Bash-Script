@@ -1,28 +1,9 @@
 #!/usr/bin/env bash
 
-#    Currently this script is too large to use the online site so ShellCheck
-#    has to be installed to lint. More important than linting are the
-#    Unit Tests for this file as it is carefully tested.
-#    An option to use ShellCheck now:
-#       - Create a Linux Cloud Instance:
-#           - sudo apt-get update # Or use the package manager for your OS
-#           - sudo apt-get install shellcheck
-#           - shellcheck encrypt.sh
-#       - Or on Mac (first install homebrew):
-#           - brew install shellcheck
-#           - Mac uses an older version of shellcheck so run:
-#             [shellcheck encrypt.sh --exclude=SC1117]
-#       - If it has no output then it ran successfully
-#  - This file is included with FastSitePHP [https://www.fastsitephp.com/]
-#
-# =============================================================================
-
 # Set Bash Options for this Script
 set -o pipefail
 
 # Error Codes
-# Output for errors is sent to STDERR by using the
-# redirection command [>&2] before calling "echo".
 ERR_GENERAL=1
 ERR_INVALID_OPT=2
 ERR_FILE_MISSING=3
@@ -49,9 +30,6 @@ FONT_ERROR="${FONT_BG_RED}${FONT_WHITE}"
 SCRIPT_PATH="${BASH_SOURCE[0]}"
 SCRIPT_NAME=$(basename "${SCRIPT_PATH}")
 
-# ---------------------------------------------------------
-# Main function, this gets called from bottom of the file
-# ---------------------------------------------------------
 main ()
 {
     local msg time_taken
@@ -73,11 +51,6 @@ main ()
     echo "${msg} Time Taken: [${time_taken}]"
 }
 
-# -----------------------------------------------------------------------------
-# Red Hat, Fedora and some Linux installs won't have [xxd] installed by default.
-# This is an initial check to verify it exists. All other commands in this
-# script are expected to exist on most Unix and Linux installs.
-# -----------------------------------------------------------------------------
 check_for_xxd ()
 {
     if ! hash xxd 2>/dev/null; then
